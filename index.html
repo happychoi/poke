@@ -1,53 +1,74 @@
 <html>
 <head>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
-    <script>
+<link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+<script>
+    var numberArray = [];
 
-var numberArray = [];
+    $(document).ready(function() {
 
-$(document).ready(function() {
+        var card_back = "https://s3.amazonaws.com/ccg-corporate-production/news-images/_DSC002120210211142606865.JPG";
+        $('.card').attr('src',card_back);
 
-    var card_back = "https://s3.amazonaws.com/ccg-corporate-production/news-images/_DSC002120210211142606865.JPG";
-    $('.card').attr('src',card_back);
-
-      for (var i = 1; i <= 100; i++) {
-        numberArray.push(i);
-      }
-
-      // 배열 순서를 무작위로 섞기
-      function shuffleArray(array) {
-        for (var i = array.length - 1; i > 0; i--) {
-          var j = Math.floor(Math.random() * (i + 1));
-          var temp = array[i];
-          array[i] = array[j];
-          array[j] = temp;
+        for (var i = 1; i <= 165; i++) {
+            numberArray.push(i);
         }
-        return array;
-      }
 
-      numberArray = shuffleArray(numberArray);
+        // 배열 순서를 무작위로 섞기
+        function shuffleArray(array) {
+            for (var i = array.length - 1; i > 0; i--) {
+                var j = Math.floor(Math.random() * (i + 1));
+                var temp = array[i];
+                array[i] = array[j];
+                array[j] = temp;
+            }
+            return array;
+        }
 
-      console.log(numberArray);
+        numberArray = shuffleArray(numberArray);
+
+        $('.card').click(function(){
+
+            var numCard = ""+numberArray.pop();
+            //var imgCard="https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2D/SV2D_"+numCard.padStart(3,"0")+".png?w=400";
+            var imgCard="https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2a/SV2a_"+numCard.padStart(3,"0")+".png?w=400";
+
+            console.log(imgCard);
+            $(this).addClass('animate__animated animate__bounce animate__delay-0.5s');
+            $(this).removeClass('closed');
+            $(this).addClass('opened');
+            $(this).attr('src',imgCard);
+        });
+
+        $('#initGame').click(function(){
+            $(".card").removeClass('animate__animated animate__bounce animate__delay-0.5s');
+            $(".card").addClass('closed');
+            $(".card").removeClass('opened');
+            $(".card").attr('src',card_back);
 
 
-
-        $('card01').click(function(){
-
-            src="https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2D/SV2D_096.png?w=400"
 
         });
-});
+    });
 
 </script>
 </head>
 <body>
 <div class="text-center">
-    <img id="card01" style="width: 200px;" class="card rounded" alt="...">
-    <img id="card02" style="width: 200px;" class="card rounded" alt="...">
-    <img id="card03" style="width: 200px;" class="card rounded" alt="...">
-    <img id="card04" style="width: 200px;" class="card rounded" alt="...">
-    <img id="card05" style="width: 200px;" class="card rounded" alt="...">
+    스칼렛&바이올렛 강화 확장팩 「포켓몬 카드 151」
 </div>
+<div><button id="initGame">포켓몬 카드 열기</button></div>
+<div class="text-center">
+    <img id="card01" style="width: 200px;" class="card rounded closed">
+    <img id="card02" style="width: 200px;" class="card rounded closed">
+    <img id="card03" style="width: 200px;" class="card rounded closed">
+    <img id="card04" style="width: 200px;" class="card rounded closed">
+    <img id="card05" style="width: 200px;" class="card rounded closed">
+</div>
+<div id="myList"></div>
 </body>
 </html>
