@@ -1,0 +1,53 @@
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    <script>
+
+var numberArray = [];
+
+$(document).ready(function() {
+
+    var card_back = "https://s3.amazonaws.com/ccg-corporate-production/news-images/_DSC002120210211142606865.JPG";
+    $('.card').attr('src',card_back);
+
+      for (var i = 1; i <= 100; i++) {
+        numberArray.push(i);
+      }
+
+      // 배열 순서를 무작위로 섞기
+      function shuffleArray(array) {
+        for (var i = array.length - 1; i > 0; i--) {
+          var j = Math.floor(Math.random() * (i + 1));
+          var temp = array[i];
+          array[i] = array[j];
+          array[j] = temp;
+        }
+        return array;
+      }
+
+      numberArray = shuffleArray(numberArray);
+
+      console.log(numberArray);
+
+
+
+        $('card01').click(function(){
+
+            src="https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2D/SV2D_096.png?w=400"
+
+        });
+});
+
+</script>
+</head>
+<body>
+<div class="text-center">
+    <img id="card01" style="width: 200px;" class="card rounded" alt="...">
+    <img id="card02" style="width: 200px;" class="card rounded" alt="...">
+    <img id="card03" style="width: 200px;" class="card rounded" alt="...">
+    <img id="card04" style="width: 200px;" class="card rounded" alt="...">
+    <img id="card05" style="width: 200px;" class="card rounded" alt="...">
+</div>
+</body>
+</html>
