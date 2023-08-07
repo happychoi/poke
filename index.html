@@ -1,5 +1,6 @@
 <html>
 <head>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <link
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
@@ -33,15 +34,17 @@
 
         $('.card').click(function(){
 
-            var numCard = ""+numberArray.pop();
-            //var imgCard="https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2D/SV2D_"+numCard.padStart(3,"0")+".png?w=400";
-            var imgCard="https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2a/SV2a_"+numCard.padStart(3,"0")+".png?w=400";
+            if($(this).hasClass("closed") === true) {
+                var numCard = "" + numberArray.pop();
+                //var imgCard="https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2D/SV2D_"+numCard.padStart(3,"0")+".png?w=400";
+                var imgCard = "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2a/SV2a_" + numCard.padStart(3, "0") + ".png?w=400";
 
-            console.log(imgCard);
-            $(this).addClass('animate__animated animate__bounce animate__delay-0.5s');
-            $(this).removeClass('closed');
-            $(this).addClass('opened');
-            $(this).attr('src',imgCard);
+                console.log(imgCard);
+                $(this).addClass('animate__animated animate__bounce animate__delay-0.5s');
+                $(this).removeClass('closed');
+                $(this).addClass('opened');
+                $(this).attr('src', imgCard);
+            }
         });
 
         $('#initGame').click(function(){
@@ -49,26 +52,59 @@
             $(".card").addClass('closed');
             $(".card").removeClass('opened');
             $(".card").attr('src',card_back);
-
-
-
         });
+
+        $('.getCard').click(function(){
+            if($(this).prev().hasClass("opened") === true) {
+                var image = new Image();
+                image.src = $(this).prev().attr('src');
+                image.className = "rounded col-lg-3 col-3";
+                $('#myList').append(image);
+                $(".card").removeClass('opened');
+            }
+        });
+
     });
 
 </script>
 </head>
 <body>
+<div class="container px-4">
+    <h1>포켓몬 카드</h1>
+    <div class="row">
+    </div>
+    <div class="row">
+        <button id="initGame" type="button" class="btn btn-primary">게임 시작</button>
+    </div>
+    <div class="row gx-5 d-flex justify-content-center">
+        <div class="col p-3 col-lg-2 col-12" style="text-align: center">
+            <img id="card01" class="card rounded closed col-lg-12 col-12">
+            <button type="button" class="getCard btn btn-outline-success">수집</button>
+        </div>
+        <div class="col p-3 col-lg-2 col-12 " style="text-align: center">
+            <img id="card02" class="card rounded closed col-lg-12 col-12">
+            <button type="button" class="getCard btn btn-outline-success">수집</button>
+        </div>
+        <div class="col p-3 col-lg-2 col-12 " style="text-align: center">
+            <img id="card03" class="card rounded closed col-lg-12 col-12">
+            <button type="button" class="getCard btn btn-outline-success">수집</button>
+        </div>
+        <div class="col p-3 col-lg-2 col-12 " style="text-align: center">
+            <img id="card04" class="card rounded closed col-lg-12 col-12">
+            <button type="button" class="getCard btn btn-outline-success">수집</button>
+        </div>
+        <div class="col p-3 col-lg-2 col-12 " style="text-align: center">
+            <img id="card05" class="card rounded closed col-lg-12 col-12">
+            <button type="button" class="getCard btn btn-outline-success">수집</button>
+        </div>
+    </div>
+    <div class="row">
+        <h2>카드 수집함</h2>
+        <div class="row gx-5 d-flex justify-content-center" id="myList"></div>
+    </div>
+</div>
 <div class="text-center">
     스칼렛&바이올렛 강화 확장팩 「포켓몬 카드 151」
 </div>
-<div><button id="initGame">포켓몬 카드 열기</button></div>
-<div class="text-center">
-    <img id="card01" style="width: 200px;" class="card rounded closed">
-    <img id="card02" style="width: 200px;" class="card rounded closed">
-    <img id="card03" style="width: 200px;" class="card rounded closed">
-    <img id="card04" style="width: 200px;" class="card rounded closed">
-    <img id="card05" style="width: 200px;" class="card rounded closed">
-</div>
-<div id="myList"></div>
 </body>
 </html>
