@@ -29,6 +29,18 @@
                 "name" : "스칼렛&바이올렛 확장팩 「클레이버스트」",
                 "imgCard" : "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2D/SV2D",
                 "countCard" : 96
+            },
+            {
+                "id" : "S8b",
+                "name" : "소드&실드 하이클래스팩 「VMAX 클라이맥스」",
+                "imgCard" : "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S8b/S8b",
+                "countCard" : 285
+            },
+            {
+                "id" : "S12a",
+                "name" : "소드&실드 하이클래스팩 「VSTAR 유니버스」",
+                "imgCard" : "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S12a/S12a",
+                "countCard" : 258
             }
         ];
 
@@ -73,11 +85,15 @@
             let card_back = "https://s3.amazonaws.com/ccg-corporate-production/news-images/_DSC002120210211142606865.JPG";
             $('.card').attr('src',card_back);
 
-
             $('.card').click(function(){
 
+                if($("#cardTitle").text() ==""){
+                    alert("선택된 카드팩이 없습니다. 카드팩을 선택해보세요.");
+                    return;
+                }
+
                 if(numberArray.length == 0){
-                    alert("모든 카드가 OPEN 되었습니다. 다른 카드팩을 열어보세요");
+                    alert("모든 카드가 OPEN 되었습니다. 다른 카드팩을 열어보세요.");
                     return;
                 }
 
@@ -94,7 +110,7 @@
                 }
             });
 
-            $('#initGame').click(function(){
+            $('#btnInitGame').click(function(){
                 $(".card").removeClass('animate__animated animate__bounce animate__delay-0.5s');
                 $(".card").addClass('closed');
                 $(".card").removeClass('opened');
@@ -106,10 +122,9 @@
                 let idCard = $(this).attr('id');
                 initGame(idCard);
             });
-
             $('.getCard').click(function(){
                 if($(this).prev().hasClass("opened") === true && $(this).prev().hasClass("getted") !== true) {
-                    let divObj = "<div class='col p-3 col-lg-2 col-12'><image src='"+$(this).prev().attr('src')+"' class='rounded col-lg-12 col-12 p-3'></div>";
+                    let divObj = "<div class='col p-3 col-lg-3 col-12'><image src='"+$(this).prev().attr('src')+"' class='rounded col-lg-12 col-12 p-3'></div>";
                     $('#myList').append(divObj);
                     $(this).prev().addClass("getted");
                 }
@@ -117,64 +132,112 @@
         });
 
     </script>
+    <style>
+        .carousel-item{
+            background-image: url('https://data1.pokemonkorea.co.kr/newdata/2023/07/2023-07-13_12-26-54-74271-1689218814.png');
+            background-size: cover;
+        }
+        .carousel-item::before{
+            content: "";
+            opacity: 0.3;
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            right: 0px;
+            bottom: 0px;
+            background-color: #000;
+        }
+        .sub-title{
+            font-size: 1.2em;font-weight: bold;vertical-align: center;padding-left: 10px;
+        }
+    </style>
 </head>
 <body>
 <div class="container px-4">
-    <h1 class="border border-success rounded" style="margin: 10px;padding:10px;font-size: 2em">현성이의 포켓몬 카드게임이다!!</h1>
-    <div class="row d-flex">
-        <div id="carouselExampleControls" class="d-flex justify-content-center carousel slide align-self-center" data-bs-ride="carousel">
-            <div class="carousel-inner w-100">
-                <div class="carousel-item active">
-                    <img src="https://data1.pokemonkorea.co.kr/2023/07/2023-07-24_19-49-34-75204-1690195774.png" id="SV2a" class="cardpack d-block w-100 img-fluid" alt="..."  data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                </div>
-                <div class="carousel-item">
-                    <img src="https://data1.pokemonkorea.co.kr/2023/06/2023-06-07_14-31-24-26167-1686115884.png" id="SV2P" class="cardpack d-block w-100 img-fluid" alt="..."  data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                </div>
-                <div class="carousel-item">
-                    <img src="https://data1.pokemonkorea.co.kr/2023/06/2023-06-07_14-03-41-77039-1686114221.png" id="SV2D" class="cardpack d-block w-100 img-fluid" alt="..."  data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+    <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel" style="height: 400px">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="3" aria-label="Slide 4"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="4" aria-label="Slide 5"></button>
+        </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active cardpack" id="SV2a">
+                <img src="https://data1.pokemonkorea.co.kr/2023/07/2023-07-24_19-49-34-75204-1690195774.png" class="d-block img-fluid"  style="height: 400px;width: 480px" alt="...">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>스칼렛&바이올렛 강화 확장팩 「포켓몬 카드 151」</h5>
+                    <p></p>
                 </div>
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev" style="background-color: black">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next" style="background-color: black">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
+            <div class="carousel-item cardpack" id="SV2P">
+                <img src="https://data1.pokemonkorea.co.kr/2023/06/2023-06-07_14-31-24-26167-1686115884.png" class="d-block img-fluid"  style="height: 400px;width: 480px" alt="...">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>스칼렛&바이올렛 확장팩 「스노해저드」</h5>
+                    <p></p>
+                </div>
+            </div>
+            <div class="carousel-item cardpack" id="SV2D">
+                <img src="https://data1.pokemonkorea.co.kr/2023/06/2023-06-07_14-03-41-77039-1686114221.png" class="d-block img-fluid"  style="height: 400px;width: 480px" alt="...">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>스칼렛&바이올렛 확장팩 「클레이버스트」</h5>
+                    <p></p>
+                </div>
+            </div>
+            <div class="carousel-item cardpack" id="S8b">
+                <img src="https://data1.pokemonkorea.co.kr/2022/01/2022-01-14_17-03-30-66162-1642147410.png" class="d-block img-fluid"  style="height: 400px;width: 480px" alt="...">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>소드&실드 하이클래스팩 「VMAX 클라이맥스」</h5>
+                    <p></p>
+                </div>
+            </div>
+            <div class="carousel-item cardpack" id="S12a">
+                <img src="https://data1.pokemonkorea.co.kr/2023/01/2023-01-02_09-19-35-27619-1672618775.png" class="d-block img-fluid"  style="height: 400px;width: 480px" alt="...">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>소드&실드 하이클래스팩 「VSTAR 유니버스」</h5>
+                    <p></p>
+                </div>
+            </div>
         </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
     </div>
-    <div class="collapse"  id="collapseExample">
-        <h3 id="cardTitle" class="rounded"></h3>
+    <div id="collapseExample" style="margin-top: 10px">
         <div class="row">
-            <button id="initGame" type="button" class="btn btn-primary btn-lg">게임 시작</button>
+            <h3 id="cardTitle" class="sub-title rounded col-lg-7 col-12"></h3>
+            <button id="btnInitGame" type="button" class="btn btn-primary btn-lg col-lg-5 col-12">게임 시작</button>
         </div>
-        <div class="row gx-5 d-flex justify-content-center">
-            <div class="col p-3 col-lg-2 col-12">
+        <div class="row d-flex justify-content-center">
+            <div class="col p-3 col-lg-3 col-12">
                 <img id="card01" class="card rounded closed col-lg-12 col-12">
                 <button type="button" class="getCard btn btn-success  btn-lg col-lg-12 col-12" style="margin-top:10px">수집</button>
             </div>
-            <div class="col p-3 col-lg-2 col-12 ">
+            <div class="col p-3 col-lg-3 col-12 ">
                 <img id="card02" class="card rounded closed col-lg-12 col-12">
                 <button type="button" class="getCard btn btn-success  btn-lg col-lg-12 col-12" style="margin-top:10px">수집</button>
             </div>
-            <div class="col p-3 col-lg-2 col-12 ">
+            <div class="col p-3 col-lg-3 col-12 ">
                 <img id="card03" class="card rounded closed col-lg-12 col-12">
                 <button type="button" class="getCard btn btn-success  btn-lg col-lg-12 col-12" style="margin-top:10px">수집</button>
             </div>
-            <div class="col p-3 col-lg-2 col-12 ">
+            <div class="col p-3 col-lg-3 col-12 ">
                 <img id="card04" class="card rounded closed col-lg-12 col-12">
                 <button type="button" class="getCard btn btn-success btn-lg col-lg-12 col-12" style="margin-top:10px">수집</button>
             </div>
-            <div class="col p-3 col-lg-2 col-12 ">
+            <div class="col p-3 col-lg-3 col-12 ">
                 <img id="card05" class="card rounded closed col-lg-12 col-12">
                 <button type="button" class="getCard btn btn-success btn-lg col-lg-12 col-12" style="margin-top:10px">수집</button>
             </div>
         </div>
         <div class="row">
-            <h3 style="margin: 20px;padding:10px">현성이의 카드 수집함</h3>
+            <h3 class="sub-title">♡ 현성이의 카드 수집함</h3>
             <div class="row d-flex justify-content-center" id="myList">
-
             </div>
         </div>
     </div>
