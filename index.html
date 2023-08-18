@@ -59,6 +59,7 @@
 
         function initGame(idCard){
 
+
             let jsonObj = null;
             for (let i = 0; i < cardpackJson.length; i++) {
                 if (cardpackJson[i].id === idCard) {
@@ -76,18 +77,20 @@
 
             numberArray = shuffleArray(numberArray);
             baseImageUrl = jsonObj.imgCard;
-            $("#cardTitle").text(jsonObj.name);
+            $("#cardTitle").val(jsonObj.name);
         }
 
 
         $(document).ready(function() {
+
+            $("#gamePoint").val(1000);
 
             let card_back = "https://s3.amazonaws.com/ccg-corporate-production/news-images/_DSC002120210211142606865.JPG";
             $('.card').attr('src',card_back);
 
             $('.card').click(function(){
 
-                if($("#cardTitle").text() ==""){
+                if($("#cardTitle").val() ==""){
                     alert("선택된 카드팩이 없습니다. 카드팩을 선택해보세요.");
                     return;
                 }
@@ -111,6 +114,27 @@
             });
 
             $('#btnInitGame').click(function(){
+
+                if($("#cardTitle").val() ==""){
+                    alert("선택된 카드팩이 없습니다. 카드팩을 선택해보세요.");
+                    return;
+                }
+                if($(".card").hasClass("opened") == false){
+                    return;
+                }
+
+                // point 차감
+                let tempPoint = $("#gamePoint").val();
+
+                if(tempPoint <= 0){
+                    alert("게임을 할 수 있는 포인트가 없습니다.");
+                    return;
+                }
+
+                tempPoint = tempPoint - 10;
+                $("#gamePoint").val(tempPoint);
+
+
                 $(".card").removeClass('animate__animated animate__bounce animate__delay-0.5s');
                 $(".card").addClass('closed');
                 $(".card").removeClass('opened');
@@ -210,8 +234,16 @@
     </div>
     <div id="collapseExample" style="margin-top: 10px">
         <div class="row">
-            <h3 id="cardTitle" class="sub-title rounded col-lg-7 col-12"></h3>
-            <button id="btnInitGame" type="button" class="btn btn-primary btn-lg col-lg-5 col-12">게임 시작</button>
+            <div class="col-lg-6 col-12" style="padding: 10px">
+                <input id="cardTitle" class="form-control form-control-lg" type="text" placeholder="카드팩을 선택하세요.">
+            </div>
+            <div class="col-lg-3 col-12" style="padding: 10px">
+                <div class="input-group col-lg-3 col-12 input-group-lg">
+                    <span class="input-group-text" id="inputGroup-sizing-default">POINT</span>
+                    <input id="gamePoint" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" style="text-align: right;padding-right: 10px;font-weight: bold">
+                </div>
+            </div>
+            <div class="col-lg-3 col-12" style="padding: 10px"><button id="btnInitGame" type="button" class="btn btn-primary btn-lg col-lg-12 col-12">게임 시작</button>
         </div>
         <div class="row d-flex justify-content-center">
             <div class="col p-3 col-lg-3 col-12">
